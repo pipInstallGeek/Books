@@ -29,6 +29,15 @@ builder.Services.AddMediatR(config =>
     config.RegisterServicesFromAssembly(assembly);
 });
 
+
+builder.Services.AddDbContext<AppDbContext>(option => {
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+});
+
+
+
+builder.Services.AddCarter();
+
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

@@ -1,6 +1,6 @@
 ﻿namespace Books.Features.Authors.CreateAuthor
 {
-    public class DeleteAuthorEndpoint
+    public class CreateAuthorEndpoint
     {
     }
 }

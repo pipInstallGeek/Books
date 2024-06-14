@@ -1,6 +1,12 @@
-﻿namespace Books.CQRS
+﻿using MediatR;
+
+namespace Books.CQRS
 {
-    public interface ICommand
+    public interface ICommand : ICommand<Unit>
+    {
+    }
+
+    public interface ICommand<out TResponse> : IRequest<TResponse>
     {
     }
 }

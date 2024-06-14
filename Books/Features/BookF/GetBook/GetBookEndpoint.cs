@@ -2,18 +2,21 @@
 using Carter;
 using MediatR;
 
-namespace Books.Features.BookF.CreateBook
+namespace Books.Features.BookF.CreateBook;
+public class GetBooksEndpoint : ICarterModule
 {
-    public class GetBooksEndpoint : CarterModule
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        public override void AddRoutes(IEndpointRouteBuilder app)
+        app.MapGet("/api/getBooks", async (ISender sender) =>
         {
-            app.MapGet("/books", async (IMediator mediator) =>
-            {
-                var result = await mediator.Send(new GetBooksHandler.GetBooksQuery());
-                return Results.Ok(result);
-            });
-        }
+            var result = await sender.Send(new GetBooksQuery());
+            return Results.Ok(result);
+        })
+        .WithName("GetBooks")
+        .Produces<IEnumerable<GetBooksResult>>(StatusCodes.Status200OK)
+        .ProducesProblem(StatusCodes.Status400BadRequest)
+        .WithSummary("Get Books")
+        .WithDescription("Get all books");
     }
-
 }
+

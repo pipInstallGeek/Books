@@ -1,26 +1,32 @@
 ﻿using Carter;
 using MediatR;
-using static Books.Features.BookF.CreateBook.CreateBookHandler;
-
 namespace Books.Features.BookF.CreateBook
 {
-    public class CreateBookEndpoint : CarterModule
-    {
-        
+    public record CreateBookRequest(string Title, int Pages);
+    public record CreateBookResponse(int Id);
 
-        public override void AddRoutes(IEndpointRouteBuilder app)
+    public class CreateBookEndpoint : ICarterModule
+    {
+        public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/books", async (CreateBookHandler.CreateBookCommand command, IMediator mediator) =>
-            {
-                /*var validationResult = new CreateBookCommandValidator().Validate(command);
-                if (!validationResult.IsValid)
+            app.MapPost("/api/createBooks",
+                async (CreateBookRequest request, ISender sender) =>
                 {
-                    return Results.ValidationProblem(validationResult.ToDictionary());
-                }
-*/
-                var result = await mediator.Send(command);
-                return Results.Created($"/books/{result.Id}", result);
-            });
+                    var command = new CreateBookCommand(request.Title, request.Pages);
+
+                    var result = await sender.Send(command);
+
+                    var response = new CreateBookResponse(result.Id);
+
+                    return Results.Created($"/books/{response.Id}", response);
+
+                })
+            .WithName("CreateBook")
+            .Produces<CreateBookResponse>(StatusCodes.Status201Created)
+            .ProducesProblem(StatusCodes.Status400BadRequest)
+            .WithSummary("Create Book")
+            .WithDescription("Create Book");
         }
     }
+
 }

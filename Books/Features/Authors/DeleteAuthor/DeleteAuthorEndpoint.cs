@@ -1,4 +1,4 @@
-﻿namespace Books.Features.Author.CreateAuthor
+﻿namespace Books.Features.Authors.CreateAuthor
 {
     public class DeleteAuthorEndpoint
     {

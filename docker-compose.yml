@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  authorsdb:
+    image: postgres
+  books:
+    image: ${DOCKER_REGISTRY-}books
+    build:
+      context: .
+      dockerfile: Books/Dockerfile

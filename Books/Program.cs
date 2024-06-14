@@ -13,11 +13,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // ------- Marten ---------------
-builder.Services.AddMarten(opts =>
+/*builder.Services.AddMarten(opts =>
 {
     opts.Connection(builder.Configuration.GetConnectionString("Database")!);
 }).UseLightweightSessions();
 
+*/
 // ------------ Cater--------------
 builder.Services.AddCarter();
 
@@ -34,9 +35,6 @@ builder.Services.AddDbContext<AppDbContext>(option => {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
 
-
-
-builder.Services.AddCarter();
 
 var app = builder.Build();
 if (app.Environment.IsDevelopment())

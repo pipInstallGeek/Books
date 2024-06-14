@@ -1,8 +1,7 @@
 ﻿using Books.CQRS;
 using Books.Data;
 using Books.Entity;
-using Marten;
-using Marten.Pagination;
+using Microsoft.EntityFrameworkCore;
 
 namespace Books.Features.Authors.GetAuthors
 {
@@ -10,12 +9,12 @@ namespace Books.Features.Authors.GetAuthors
     public record GetAuthorsResult(IEnumerable<Author> Authors);
 
 
-    internal class GetAuthorsHandler(IDocumentSession session) : IQueryHandler<GetAuthorsQuery, GetAuthorsResult>
+    internal class GetAuthorsHandler(AppDbContext _db) : IQueryHandler<GetAuthorsQuery, GetAuthorsResult>
 
     {
         public async Task<GetAuthorsResult> Handle(GetAuthorsQuery query, CancellationToken cancellationToken)
         {
-            var authors = await session.Query<Author>().ToPagedListAsync(query.PageNumber ?? 1, query.PageSize ?? 10, cancellationToken);
+            var authors = await _db.Authors.ToListAsync(cancellationToken);
             return new GetAuthorsResult(authors);
         }
     }

@@ -8,7 +8,7 @@ namespace Books.Features.BookF.CreateBook
     {
         public override void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("/books", async (IMediator mediator) =>
+            app.MapGet("/book", async (IMediator mediator) =>
             {
                 var result = await mediator.Send(new GetBooksHandler.GetBooksQuery());
                 return Results.Ok(result);

@@ -1,4 +1,4 @@
-﻿namespace Books.Features.Book.CreateBook
+﻿namespace Books.Features.BookF.CreateBook
 {
     public class DeleteBookEndpoint
     {

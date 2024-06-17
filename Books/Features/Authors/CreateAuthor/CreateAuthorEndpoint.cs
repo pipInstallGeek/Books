@@ -5,7 +5,7 @@ using MediatR;
 namespace Books.Features.Authors.CreateAuthor
 {
     public record CreateAuthorRequest( string Name);
-    public record CreateAuthorResponse(int Id);
+    public record CreateAuthorResponse(int Id, string Name);
     public class CreateAuthorEndpoint : ICarterModule
     {
         public void AddRoutes(IEndpointRouteBuilder app)

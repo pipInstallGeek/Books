@@ -6,7 +6,7 @@ using Books.Entity;
 namespace Books.Features.Authors.CreateAuthor
 {
     public record CreateAuthorCommand(string Name) :ICommand<CreateAuthorResult>;
-    public record CreateAuthorResult(int Id);
+    public record CreateAuthorResult(int Id, string Name);
 
     internal class CreateAuthorCommandHandler(AppDbContext _db) : ICommandHandler<CreateAuthorCommand, CreateAuthorResult>
     {
@@ -18,7 +18,7 @@ namespace Books.Features.Authors.CreateAuthor
             };
             await _db.Authors.AddAsync(author);
             await _db.SaveChangesAsync();
-            return new CreateAuthorResult(author.Id);
+            return new CreateAuthorResult(author.Id, author.Name);
         }
     }
 }

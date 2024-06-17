@@ -9,6 +9,7 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY ["Books/Books.csproj", "Books/"]
 RUN dotnet restore "./Books/Books.csproj"
 COPY . .
@@ -22,4 +23,7 @@ RUN dotnet publish "./Books.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:U
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Install necessary packages (example)
+RUN apt-get update && apt-get install -y curl
 ENTRYPOINT ["dotnet", "Books.dll"]

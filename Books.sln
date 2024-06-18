@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Books", "Books\Books.csproj", "{9F71D8BF-2C30-44B7-A87F-F025C8A1EF4F}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{91C4E7DC-7CC1-40DE-A942-94B4B50267CF}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{200AEE37-05ED-473D-9A1F-10A5A616420D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Books_Web", "Books_Web\Books_Web.csproj", "{E853B0A6-CBF3-45D7-A2C1-1E98D4FD25CA}"
 EndProject

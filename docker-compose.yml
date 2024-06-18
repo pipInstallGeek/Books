@@ -3,6 +3,7 @@ version: '3.4'
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
+
   books:
     image: ${DOCKER_REGISTRY-}books
     build:
@@ -10,3 +11,10 @@ services:
       dockerfile: Books/Dockerfile
     
         
+
+  books_web:
+    image: ${DOCKER_REGISTRY-}booksweb
+    build:
+      context: .
+      dockerfile: Books_Web/Dockerfile
+

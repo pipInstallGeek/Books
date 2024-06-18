@@ -7,9 +7,9 @@ services:
     environment:
         - ACCEPT_EULA=Y
         - MSSQL_SA_PASSWORD=Password@12345#
-    user: "0:0"  # Run the container with root user and group
-    security_opt:
-      - "seccomp=unconfined"
+    # user: "0:0"  # run the container with root user and group
+    # security_opt:
+    #   - "seccomp=unconfined"
   books:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

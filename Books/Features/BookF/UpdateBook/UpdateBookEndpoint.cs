@@ -10,7 +10,7 @@ public class UpdateBookEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("/books/{id:int}", async (int id, UpdateBookRequest request, ISender sender) =>
+        app.MapPut("/api/updateBook/{id:int}", async (int id, UpdateBookRequest request, ISender sender) =>
         {
             if (id != request.Id)
             {

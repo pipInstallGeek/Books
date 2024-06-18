@@ -7,7 +7,7 @@ public class DeleteBookEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("/books/{id:int}", async (int id, ISender sender) =>
+        app.MapDelete("/api/deleteBook/{id:int}", async (int id, ISender sender) =>
         {
             var command = new DeleteBookCommand(id);
 

@@ -9,7 +9,7 @@ namespace Books.Features.BookF.CreateBook
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("/api/createBooks",
+            app.MapPost("/api/createBook",
                 async (CreateBookRequest request, ISender sender) =>
                 {
                     var command = new CreateBookCommand(request.Title, request.Pages);

@@ -8,6 +8,5 @@ services:
     build:
       context: .
       dockerfile: Books/Dockerfile
-    depends_on:
-        - db
+    
         

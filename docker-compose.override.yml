@@ -7,19 +7,17 @@ services:
     environment:
         - ACCEPT_EULA=Y
         - MSSQL_SA_PASSWORD=Password@12345#
-    healthcheck:
-      test: ["CMD-SHELL", "sqlcmd -S localhost -U SA -P 'Password@12345#' -Q 'SELECT 1'"]
-      interval: 10s
-      retries: 10
+    user: "0:0"  # Run the container with root user and group
+    security_opt:
+      - "seccomp=unconfined"
   books:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080
-      # - ASPNETCORE_HTTP_PORTS=8080
-      # - ASPNETCORE_HTTPS_PORTS=8081
-      - DB_USER=sa
-      - DB_PASSWORD=Password@12345#
-      - DB_HOST=db
+      - ConnectionStrings__DefaultSQLConnection=Server=db;User Id=sa;Password=Password@12345#;TrustServerCertificate=True;MultipleActiveResultSets=true;
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+    depends_on:
+        - db
     ports:
       - "8080:8080"
       - "8081:8081"
